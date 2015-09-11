@@ -5,13 +5,13 @@ package Lesson4;
  */
 public class Shuffle {
     public static void main(String[] args) {
-        int[] cards = new int [5];
-        System.out.println("Before Lesson4.Shuffle");
+        int[] cards = new int [32];
+        System.out.println("Before Shuffle");
         for (int i = 0; i < cards.length; i++) {
             cards[i] = (int)(Math.random() * 32);
             System.out.println(cards[i]);
         }
-        System.out.println("After Lesson4.Shuffle");
+        System.out.println("After Shuffle");
         for (int i = cards.length -1; i >= 0; i--) {
             /*Random rand = new Random();
             int randGenerator = rand.nextInt(i+1);*/
