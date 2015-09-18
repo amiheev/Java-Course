@@ -14,7 +14,7 @@ public class Customer {
     private String surname;
     private String name;
     private String cardNumber;
-    private long accountNumber;
+    private long billNumber;
 
     Pattern creditCard = Pattern.compile("[0-9]{16}");
 
@@ -27,12 +27,12 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int id, String surname, String name, String cardNumber, long accountNumber, String city, String street, int houseNumber, int flatNumber) {
+    public Customer(int id, String surname, String name, String cardNumber, long billNumber, String city, String street, int houseNumber, int flatNumber) {
         this.id = id;
         this.surname = surname;
         this.name = name;
         this.cardNumber = cardNumber;
-        this.accountNumber = accountNumber;
+        this.billNumber = billNumber;
         address.setCity(city);
         address.setStreet(street);
         address.setHouseNumber(houseNumber);
@@ -72,24 +72,24 @@ public class Customer {
         boolean isCorrect = m.matches();
         if (isCorrect){
             this.cardNumber = cardNumber;
-        }else System.out.println(cardNumber +  " incorrect type of credit card");;
+        }else System.err.println(cardNumber +  " incorrect type of credit card, credit card should contain 16 numbers");;
 
 
 
     }
 
-    public long getAccountNumber() {
-        return accountNumber;
+    public long getBillNumber() {
+        return billNumber;
     }
 
-    public void setAccountNumber(long accountNumber) {
-        if (accountNumber > 0000000000000000 & accountNumber < 9999999999999999l)
-        this.accountNumber = accountNumber;
+    public void setBillNumber(long billNumber) {
+        if (billNumber > 0000000000000000 & billNumber < 9999999999999999l)
+        this.billNumber = billNumber;
     }
 
     public String toString(){
         return "id " + getId() + ", name " + getName() + ", surname " + getSurname() + ", city " +  address.getCity() + ", street " + address.getStreet() + ", house " + address.getHouseNumber() +
-                ", flat " + address.getFlatNumber() + ", card number " + getCardNumber() + ", account number " + getAccountNumber();
+                ", flat " + address.getFlatNumber() + ", card number " + getCardNumber() + ", bill number " + getBillNumber();
     }
 
 

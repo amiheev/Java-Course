@@ -31,10 +31,12 @@ public class CustomerTest {
                 customer.setName(in.next());
                 System.out.println("input Customer surname ");
                 customer.setSurname(in.next());
-                System.out.println("input Customer card number ");
-                customer.setCardNumber(in.next());
+                while (customer.getCardNumber() == null){
+                    System.out.println("input Customer card number ");
+                    customer.setCardNumber(in.next());
+                }
                 System.out.println("input Customer bill number");
-                customer.setAccountNumber(in.nextLong());
+                customer.setBillNumber(in.nextLong());
                 System.out.println("input customer city");
                 customer.address.setCity(in.next());
                 System.out.println("input customer street");
@@ -56,8 +58,3 @@ public class CustomerTest {
     }
 }
 
-    /*    if (Customer.customerList.size() > 0) {
-        System.out.println(Customer.customerList);
-        } else {
-        System.out.println("Список клиентов пуст ");
-        }*/
