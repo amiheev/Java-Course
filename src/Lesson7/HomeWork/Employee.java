@@ -76,8 +76,6 @@ public class Employee {
 
 
 
-    public static void main(String[] args){
-        createEmployee(553453, "Alex", "Mikheev", 3232.32);
-    }
+
 	
 }

@@ -17,10 +17,6 @@ public class EmployeeCreator {
         while (yes == in.nextInt()) {
             employeeCreator(in, yes);
         }
-        System.out.println("before sort");
-        printEmployee();
-        sort();
-        System.out.println("aftersort");
         printEmployee();
         System.out.println("На выдачу зп сотрудникам нужно: " +  totalSallary() + " грн");
         minEmployeeSalary();
@@ -97,14 +93,8 @@ public class EmployeeCreator {
 
     }
 
-    public static void sort(){
-        Collections.sort(employeeList, new Comparator<Employee>() {
-            @Override
-            public int compare(Employee o1, Employee o2) {
-                return o1.toString().compareTo(o2.toString());
-            }
-        });
-    }
+
+
 
 
 
