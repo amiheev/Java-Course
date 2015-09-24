@@ -1,8 +1,6 @@
 package Lesson7.HomeWork;
 
-/**
- * Created by Alexey on 24.09.2015.
- */
+
 public class FabrikaManager extends Employee {
     private double bonus;
 
