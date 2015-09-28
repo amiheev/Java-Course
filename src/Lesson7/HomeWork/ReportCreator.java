@@ -1,43 +1,11 @@
 package Lesson7.HomeWork;
 
-import java.util.*;
-
 /**
- * Created by Alexey on 24.09.2015.
+ * Created by Alexey on 28.09.2015.
  */
-public class EmployeeCreatorArray {
+public class ReportCreator {
 
-    static Employee employeeList [] = new Employee[3];
-    static Scanner in = new Scanner(System.in);
-    static int counter = 0;
-
-    public static Employee employeeCreator(){
-        System.out.println("заполните данные сотрудника");
-        System.out.println("---------------------------------------");
-        System.out.println("введите ИНН сотрудника");
-        int inn = in.nextInt();
-        System.out.println("введите фамилию сотрудника");
-        String surname = in.next();
-        System.out.println("введите имя сотрудника");
-        String name = in.next();
-        System.out.println("введите зарплату сотрудника");
-        double salary = in.nextDouble();
-        System.out.println("введите бонус если сотрудник менеджер");
-        double bonus = in.nextDouble();
-        if (bonus == 0){
-            employeeList[counter] = (Employee.createEmployee(inn, name, surname, salary));
-            System.out.println("сотрудник успешно добавлен");
-            return Employee.createEmployee(inn, name, surname, salary);
-        }else employeeList[counter] = (FabrikaManager.createEmployee(inn, name, surname, salary, bonus));
-        System.out.println("менеджер успешно добавлен");
-        return FabrikaManager.createEmployee(inn, name, surname, salary, bonus);
-
-
-
-
-    }
-
-    public static double totalSallary(){
+    public static double totalSallary(Employee[] employeeList){
         double total = 0;
         for (int i = 0; i < employeeList.length; i++){
             total += employeeList[i].getSalary();
@@ -45,15 +13,15 @@ public class EmployeeCreatorArray {
         return total;
     }
 
-    public static void printEmployee(){
+    public static void printEmployee(Employee[] employeeList){
         for (int i = 0; i < employeeList.length; i++){
             System.out.println(employeeList[i]);
         }
     }
 
-    public static void minEmployeeSalary(){
+    public static void minEmployeeSalary(Employee[] employeeList){
         int index = 0;
-        double minSalary = minSalary = employeeList[0].getSalary();
+        double minSalary  = employeeList[0].getSalary();
         for (int i = 1; i <employeeList.length; i++){
             if (minSalary > employeeList[i].getSalary()){
                 minSalary = employeeList[i].getSalary();
@@ -64,9 +32,9 @@ public class EmployeeCreatorArray {
 
     }
 
-    public static void maxEmployeeSalary(){
+    public static void maxEmployeeSalary(Employee[] employeeList){
         int index = 0;
-        double maxSalary = maxSalary = employeeList[0].getSalary();
+        double maxSalary = employeeList[0].getSalary();
         for (int i = 1; i < employeeList.length; i++){
             if (maxSalary < employeeList[i].getSalary()){
                 maxSalary = employeeList[i].getSalary();
@@ -79,7 +47,7 @@ public class EmployeeCreatorArray {
 
 
     // Сортировка по зарплате
-    public static void sortSalary(){
+    public static void sortSalary(Employee[] employeeList){
         for (int i = 0; i < employeeList.length-1; i++){
             for (int j = i+1; j < employeeList.length; j++){
                 if (employeeList[i].getSalary()<employeeList[j].getSalary()){
@@ -93,7 +61,7 @@ public class EmployeeCreatorArray {
 
 
     // Сортировка по имени
-    public static void sortName(){
+    public static void sortName(Employee[] employeeList){
         for (int i = 0; i < employeeList.length-1; i++){
             for (int j = i+1; j < employeeList.length; j++){
                 if (employeeList[i].getName().compareToIgnoreCase(employeeList[j].getName()) > 0){
@@ -108,7 +76,7 @@ public class EmployeeCreatorArray {
 
 
     // Сортировка по фамилии
-    public static void sortSurname(){
+    public static void sortSurname(Employee[] employeeList){
         for (int i = 0; i < employeeList.length-1; i++){
             for (int j = i+1; j < employeeList.length; j++){
                 if (employeeList[i].getSurname().compareToIgnoreCase(employeeList[j].getSurname()) > 0){
@@ -123,7 +91,7 @@ public class EmployeeCreatorArray {
 
 
     // Сортировка по номеру ИНН
-    public static void sortByInn(){
+    public static void sortByInn(Employee[] employeeList){
         for (int i = 0; i < employeeList.length-1; i++){
             for (int j = i+1; j < employeeList.length; j++){
                 if (employeeList[i].getInn()<employeeList[j].getInn()){
@@ -135,4 +103,3 @@ public class EmployeeCreatorArray {
         }
     }
 }
-
