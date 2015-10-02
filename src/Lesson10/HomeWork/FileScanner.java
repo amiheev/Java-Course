@@ -95,5 +95,5 @@ public class FileScanner {
         wordsrFileScanner(fileName);
         sentencesFileScanner(fileName);
     }
-    // test
+    // remove
 }
