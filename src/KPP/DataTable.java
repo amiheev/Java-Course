@@ -10,8 +10,8 @@ import java.awt.event.ActionListener;
 /**
  * Created by Alexey on 12.10.2015.
  */
-public class DataTable {
-    static JTable employees;
+public class DataTable{
+
     static DBConnection connect = new DBConnection();
     public static void main(String[] args){
         connect.init();
@@ -20,6 +20,8 @@ public class DataTable {
         connect.fillDB();
         createDataTable();
     }
+
+
     public static void createDataTable(){
         JFrame frame = new JFrame("CheckPoint");
         frame.setSize(new Dimension(600,400));
@@ -36,15 +38,17 @@ public class DataTable {
 
         // JTable
         EmployeeTableModel etm = new EmployeeTableModel();
-        employees = new JTable(etm);
+        JTable employees;employees = new JTable(etm);
 
 
 
         JScrollPane  employeesScroolPane = new JScrollPane(employees);
         employeesScroolPane.setPreferredSize(new Dimension(400, 400));
-
         etm.addData(connect);
-        etm.checkIn(connect, "2");
+
+
+
+
 
 
         frame.add(employeesScroolPane, new GridBagConstraints(0,0,2,1,1,1, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(1,1,1,1), 0,0));
@@ -56,13 +60,19 @@ public class DataTable {
         frame.setVisible(true);
         frame.pack();
 
+
+
     }
+
 }
 
-class InputButtonActionListener implements ActionListener {
+class InputButtonActionListener extends DataTable implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        EmployeeTableModel employeeTableModel = new EmployeeTableModel();
+        employeeTableModel.checkIn(connect, "2");
     }
 }
+
+

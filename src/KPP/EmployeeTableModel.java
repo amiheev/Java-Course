@@ -3,9 +3,12 @@ package KPP;
 import DataBase.DBConnection;
 
 import javax.swing.table.AbstractTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by Alexey on 12.10.2015.
@@ -27,9 +30,20 @@ public class EmployeeTableModel extends AbstractTableModel {
         dataArrayList.add(rowTable );
     }
 
+    public void updateData(String[] row, String id){
+        String[] rowTable = row;
+        for (int i = 0; i < 6; i++){
+            if (id.equals(getValueAt(0,i))){
+
+            }
+        }
+    }
 
 
-
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        super.setValueAt(aValue, rowIndex, columnIndex);
+    }
 
     @Override
     public int getRowCount() {
@@ -60,17 +74,19 @@ public class EmployeeTableModel extends AbstractTableModel {
         return rows[columnIndex];
     }
 
+
+
     public void addData(DBConnection connect){
         ResultSet resultSet = connect.query("SELECT * FROM person");
         try {
             while (resultSet.next()){
                 String[] row = {
-                resultSet.getString("id"),
-                resultSet.getString("name"),
-                resultSet.getString("surname"),
-                resultSet.getString("is_present"),
-                resultSet.getString("entry_time"),
-                resultSet.getString("exit_time")
+                        resultSet.getString("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("surname"),
+                        resultSet.getString("is_present"),
+                        resultSet.getString("entry_time"),
+                        resultSet.getString("exit_time")
                 };
                 addData(row);
             }
@@ -82,6 +98,7 @@ public class EmployeeTableModel extends AbstractTableModel {
 
 
     public void checkIn(DBConnection connection, String index) {
+        dataArrayList.clear();
         connection.updateQuery("UPDATE person SET is_present = 'true' where id =" + index);
         connection.updateQuery("UPDATE person SET entry_time = datetime('now','localtime') where id=" + index);
         ResultSet resultSet = connection.query("SELECT * FROM person");
@@ -102,6 +119,7 @@ public class EmployeeTableModel extends AbstractTableModel {
         }
     }
 }
+
 
     /*public static void printEmployeeNow() {
         ResultSet rs = dbConnection.query("SELECT * FROM person");
