@@ -81,7 +81,7 @@ class InputButtonActionListener extends DataTable implements ActionListener {
         DataTable dataTable = new DataTable();
         CreateJFrame jFrame = new CreateJFrame();
         dataTable.createJFrame.etm.checkIn(connect, createJFrame.cardId.getText());
-        jFrame.employees.repaint();
+        dataTable.createJFrame.frame.repaint();
 
 
     }
@@ -94,8 +94,7 @@ class ExitButtonActionListener extends DataTable implements ActionListener {
         DataTable dataTable = new DataTable();
         CreateJFrame jFrame = new CreateJFrame();
         dataTable.createJFrame.etm.checkOut(connect, createJFrame.cardId.getText());
-        jFrame.employees.repaint();
-
+        dataTable.createJFrame.frame.repaint();
 
     }
 }
