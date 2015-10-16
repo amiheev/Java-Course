@@ -17,9 +17,10 @@ public class EmployeeTableModel extends AbstractTableModel {
 
     private int columnCount = 6;
     private ArrayList<String[]> dataArrayList;
-    public EmployeeTableModel (){
+
+    public EmployeeTableModel() {
         dataArrayList = new ArrayList<String[]>();
-        for (int i = 0; i < dataArrayList.size(); i++){
+        for (int i = 0; i < dataArrayList.size(); i++) {
             dataArrayList.add(new String[getColumnCount()]);
         }
     }
@@ -27,13 +28,13 @@ public class EmployeeTableModel extends AbstractTableModel {
     public void addData(String[] row) {
         String[] rowTable = new String[getColumnCount()];
         rowTable = row;
-        dataArrayList.add(rowTable );
+        dataArrayList.add(rowTable);
     }
 
-    public void updateData(String[] row, String id){
+    public void updateData(String[] row, String id) {
         String[] rowTable = row;
-        for (int i = 0; i < 6; i++){
-            if (id.equals(getValueAt(0,i))){
+        for (int i = 0; i < 6; i++) {
+            if (id.equals(getValueAt(0, i))) {
 
             }
         }
@@ -56,14 +57,20 @@ public class EmployeeTableModel extends AbstractTableModel {
     }
 
     @Override
-    public String getColumnName (int columnIndex){
-        switch (columnIndex){
-            case 0 : return "id";
-            case 1 : return "name";
-            case 2 : return "surname";
-            case 3 : return "isPresent";
-            case 4 : return "entry_time";
-            case 5 : return "exit_time";
+    public String getColumnName(int columnIndex) {
+        switch (columnIndex) {
+            case 0:
+                return "id";
+            case 1:
+                return "name";
+            case 2:
+                return "surname";
+            case 3:
+                return "isPresent";
+            case 4:
+                return "entry_time";
+            case 5:
+                return "exit_time";
         }
         return "";
     }
@@ -75,11 +82,11 @@ public class EmployeeTableModel extends AbstractTableModel {
     }
 
 
+    public void addData(DBConnection connect) {
 
-    public void addData(DBConnection connect){
         ResultSet resultSet = connect.query("SELECT * FROM person");
         try {
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String[] row = {
                         resultSet.getString("id"),
                         resultSet.getString("name"),
@@ -90,11 +97,10 @@ public class EmployeeTableModel extends AbstractTableModel {
                 };
                 addData(row);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 
 
     public void checkIn(DBConnection connection, String index) {
@@ -103,7 +109,7 @@ public class EmployeeTableModel extends AbstractTableModel {
         connection.updateQuery("UPDATE person SET entry_time = datetime('now','localtime') where id=" + index);
         ResultSet resultSet = connection.query("SELECT * FROM person");
         try {
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String[] row = {
                         resultSet.getString("id"),
                         resultSet.getString("name"),
@@ -114,60 +120,42 @@ public class EmployeeTableModel extends AbstractTableModel {
                 };
                 addData(row);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    public void checkOut(DBConnection connection, String index) {
+        if (Integer.parseInt(index) >=0 && Integer.parseInt(index) <= 4){
+            ResultSet resultCheck = connection.query("SELECT is_present FROM person where id =" + index);
+            try {
+                String bool = resultCheck.getString("is_present");
+                if (bool.compareToIgnoreCase("true") == 0) {
+                    dataArrayList.clear();
+                    connection.updateQuery("UPDATE  person SET is_present = 'false' where id =" + index);
+                    connection.updateQuery("UPDATE person SET exit_time = datetime('now','localtime') where id=" + index);
+                    ResultSet resultSet = connection.query("SELECT * FROM person");
+                    while (resultSet.next()) {
+                        String[] row = {
+                                resultSet.getString("id"),
+                                resultSet.getString("name"),
+                                resultSet.getString("surname"),
+                                resultSet.getString("is_present"),
+                                resultSet.getString("entry_time"),
+                                resultSet.getString("exit_time")
+                        };
+                        addData(row);
+                    }
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
 }
 
 
-    /*public static void printEmployeeNow() {
-        ResultSet rs = dbConnection.query("SELECT * FROM person");
-        try {
-            int index = 0;
-            while (rs.next()) {
-                System.out.println(String.format("%d %s %s status in office = %b время входа: %s  время выхода %s", emp.get(index).getId(), emp.get(index).getName(),
-                        emp.get(index).getSurname(), emp.get(index).getPresent(), emp.get(index).getEntry_time(), emp.get(index).getExit_time()));
-                index++;
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-    }*/
-
-
-        /*}catch (IndexOutOfBoundsException e) {
-            System.err.println("Карта не действительна");
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            printEmployeeNow();
-        }*/
-
-
-
-    /*public static void checkOut(int index){
-        try {
-            if (emp.get(index).getPresent() == true){
-                System.out.println("EXIT SUCCESSFULLY");
-                emp.get(index).setPresent(false);
-                dbConnection.updateQuery("UPDATE  person SET present = 0 where id =" + index);
-                dbConnection.updateQuery("UPDATE person SET exit_time = datetime('now','localtime') where id=" + index);
-                ResultSet rs = dbConnection.query("SELECT exit_time from person where id =" + index);
-                emp.get(index).setExit_time(rs.getString("exit_time"));
-            }else {
-                System.err.println("Ошибка!!!");
-                System.out.println("Вы уже вышли из здания");
-            }
-        }catch (IndexOutOfBoundsException e) {
-            System.err.println("Карта не действительна");
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        finally {
-            printEmployeeNow();
-        }
-
-    }*/
 

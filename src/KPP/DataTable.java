@@ -13,66 +13,17 @@ import java.awt.event.ActionListener;
 public class DataTable{
 
     static DBConnection connect = new DBConnection();
+    static CreateJFrame createJFrame = new CreateJFrame();
     public static void main(String[] args){
         connect.init();
         connect.createPersonsTable();
         connect.cleanPersonsTable();
         connect.fillDB();
-        createDataTable();
-    }
-
-
-    public static void createDataTable(){
-        JFrame frame = new JFrame("CheckPoint");
-        frame.setSize(new Dimension(600,400));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(new GridBagLayout());
-
-        JTextField cardId = new JTextField();
-        JButton input = new JButton("input");
-
-
-        input.addActionListener(new InputButtonActionListener());
-
-
-        // JTable
-        EmployeeTableModel etm = new EmployeeTableModel();
-        JTable employees;employees = new JTable(etm);
-
-
-
-        JScrollPane  employeesScroolPane = new JScrollPane(employees);
-        employeesScroolPane.setPreferredSize(new Dimension(400, 400));
-        etm.addData(connect);
-
-
-
-
-
-
-        frame.add(employeesScroolPane, new GridBagConstraints(0,0,2,1,1,1, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(1,1,1,1), 0,0));
-
-        frame.add(cardId, new GridBagConstraints(0,1,1,1,1,1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, new Insets(1,1,1,1), 0,0));
-
-        frame.add(input, new GridBagConstraints(1,1,1,1,1,1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, new Insets(1,1,1,1), 0,0));
-
-        frame.setVisible(true);
-        frame.pack();
-
-
-
-    }
-
-}
-
-class InputButtonActionListener extends DataTable implements ActionListener {
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        EmployeeTableModel employeeTableModel = new EmployeeTableModel();
-        employeeTableModel.checkIn(connect, "2");
+        createJFrame.setFrameParam();
+        createJFrame.JScroolPaneSetSize();
+        createJFrame.etm.addData(connect);
     }
 }
+
 
 
