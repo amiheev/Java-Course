@@ -10,8 +10,8 @@ public class ParkingArrayList {
     List<Car> autoParking = new ArrayList<>();
 
     public void carEnter(Car car){
-        int placeIndex = nearPlace();
-        if (placeIndex == 999){
+        int placeIndex = nearPlace(car);
+        if (placeIndex == -1){
             autoParking.add(car);
         }else autoParking.set(placeIndex, car);
 
@@ -23,14 +23,8 @@ public class ParkingArrayList {
 
     }
 
-    public int nearPlace(){
-        int index = 999;
-        for (int i = 0; i < autoParking.size(); i++){
-            if (autoParking.get(i).getGosNumber() == "Свободно"){
-                index = i;
-                return index;
-            }
-        }
+    public int nearPlace(Car car){
+        int index = autoParking.indexOf(car.getGosNumber().contains("Свободно"));
         return index;
     }
 }

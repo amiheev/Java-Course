@@ -18,7 +18,7 @@ public class Car {
         return gosNumber;
     }
 
-    public void setGosNumber(String gosNumber) {
+    private void setGosNumber(String gosNumber) {
         this.gosNumber = gosNumber;
     }
 
@@ -27,7 +27,7 @@ public class Car {
     public Car(){}
 
     public Car(String gosNumber) {
-        this.gosNumber = gosNumber;
+        setGosNumber(gosNumber);
 
     }
 
