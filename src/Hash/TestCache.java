@@ -10,11 +10,11 @@ public class TestCache {
         cache.addKeyValue(2, "B");
         cache.addKeyValue(3, "C");
         cache.addKeyValue(4, "D");
-        cache.addKeyValue(5, "E");
+        cache.addKeyValue(5, "E", 5);
         cache.addKeyValue(6, "F");
         cache.addKeyValue(7, "G");
         cache.addKeyValue(8, "H");
-        cache.addKeyValue(9, "J");
+        cache.addKeyValue(9, "J", 15);
         cache.addKeyValue(10, "K");
         cache.addKeyValue(11, "L", 10);
         System.out.println(cache.getAllKeys());

@@ -24,9 +24,8 @@ public class Cache   {
 
     // получитть значение по ключу
     public String getValueByKey(Integer key){
-        if (cacheTable.containsKey(key)){
-            return cacheTable.get(key);
-        }else return null;
+         return cacheTable.get(key);
+
     }
 
 
@@ -40,7 +39,7 @@ public class Cache   {
     public void addKeyValue(Integer key, String value){
         try {
             int size = this.cacheTable.size();
-            if (size >= 10){
+            if (size >= getCapacity()){
                 throw new IndexOutOfBoundsException();
             }else {
                 this.cacheTable.put(key, value);
